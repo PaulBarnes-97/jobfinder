@@ -1,0 +1,22 @@
+from keras.datasets import cifar10
+import matplotlib.pyplot as plot
+import  keras.utils as k_utils
+import numpy as np
+(img_train, lab_train), (img_test, lab_test) = cifar10.load_data()
+
+
+#max_index = np.argmax([lab_train[0]])
+#print(labels[max_index])
+
+labels = ["airplane", "automobile", "bird", "cat", "deer", "dog", "frog", "horse", "ship", "truck"]
+
+lab_train = k_utils.to_categorical(lab_train)
+lab_test = k_utils.to_categorical(lab_test)
+
+img_train = img_train.astype('float32')
+img_train = img_train/255.0
+
+img_test = img_test.astype('float32')
+img_test = img_test/255.0
+
+print(img_test[0])
