@@ -1,5 +1,5 @@
 from linkedin_api import Linkedin
-import time
+import json
 
 
 
@@ -7,7 +7,7 @@ import time
 #Logs into linkedin and performs a job search.
 #100 jobs are found and whittled down to a smaller list
 def job_search():
-    start = time.time()
+    #start = time.time()
     api = Linkedin('paulwesleybarnes@gmail.com', 'Paul1997')
 
     #now = time.time()
@@ -25,35 +25,39 @@ def job_search():
 
      #   now = time.time()
      #  print(now-start,"\n")
-
-        job = []
+        job_TEST_list = []
         j = jobs[index]
         a = j.get('companyDetails')
         a = str(a.get('company'))
         a = list(a.split(":"))
         comp = api.get_company(a[-1])
-        c= comp.get('universalName')
-        d = comp.get('url')
-        a = str(j.get('title'))
-        job.append(str(a))
-        job.append((str(c)))
-        job.append(str(d))
+        comp_Name= comp.get('universalName')
+        comp_Addr = comp.get('url')
+        job_title = str(j.get('title'))
+
         a = j.get('formattedLocation')
         a = list(a.split(", "))
-        job.append(a[0])
-        if len(a) > 1:
-            job.append(a[1])
+        job_city = str(a[0])
+        job_state = str(a[1])
+
         a = (j.get('briefBenefitsDescription'))
         if len(a) < 1:
             a=" "
-        job.append(str(a))
+        job_benefits = str(a)
+
         a = (j.get('applyMethod'))
-        b = a.get('companyApplyUrl')
-        job.append(str(b))
-        if job[-1] != 'None':
-            joblist.append(job)
-            print(job)
-    joblist.sort(key=lambda x: x[4])
-    return joblist
+        job_url = str(a.get('companyApplyUrl'))
+
+        job_json= {
+            "Job_Title": job_title,
+            "Company": str(comp_Name),
+            "LinkedIn": str(comp_Addr),
+            "City": job_city,
+            "State": job_state,
+            "Benefits": job_benefits,
+            "Link": job_url
+        }
+        job_TEST_list.append(job_json)
+        print(job_json)
     #    now = time.time()
     #   print(now - start, "\n")
