@@ -38,8 +38,10 @@ def job_search():
         a = j.get('formattedLocation')
         a = list(a.split(", "))
         job_city = str(a[0])
-        job_state = str(a[1])
-
+        if len(a)>1:
+            job_state = str(a[1])
+        else:
+            continue
         a = (j.get('briefBenefitsDescription'))
         if len(a) < 1:
             a=" "
@@ -48,7 +50,7 @@ def job_search():
         a = (j.get('applyMethod'))
         job_url = str(a.get('companyApplyUrl'))
 
-        job_json= {
+        job_json = {
             "Job_Title": job_title,
             "Company": str(comp_Name),
             "LinkedIn": str(comp_Addr),
@@ -57,7 +59,8 @@ def job_search():
             "Benefits": job_benefits,
             "Link": job_url
         }
-        job_TEST_list.append(job_json)
+
         print(job_json)
     #    now = time.time()
     #   print(now - start, "\n")
+job_search()
