@@ -11,7 +11,7 @@ t = today
 
 
 def heading(cs):
-    headings = ("Visited","Time" ,"Job Title", "Company", "LinkedIn", "City", "State", "Benefit", "Link","ID", "Reply")
+    headings = ("Job Title", "Company", "LinkedIn", "City", "State", "Benefit", "Link")
     for i in range(0, len(headings)):
         cs.cell(row=1, column=i + 1).value = headings[i]
 
@@ -25,7 +25,6 @@ def validate(fp, t):
             print('sheet does not exist, creating')
             cs = cwb.create_sheet(str(t))
             heading(cs)
-
             cwb.save(fp)
             print("Done, saved")
         else:
@@ -39,7 +38,7 @@ def fill(j):
     cwb = load_workbook(file_path, read_only=False)
     cws = cwb[str(today)]
     for i in range(0,len(j)):
-        "Visited", "Time", "Job Title", "Company", "LinkedIn", "City", "State", "Benefit", "Link", "ID", "Reply"
+        "Job Title", "Company", "LinkedIn", "City", "State", "Benefit", "Link"
         c=0
         r = cws.max_row+1
         for k in range(3,10):
