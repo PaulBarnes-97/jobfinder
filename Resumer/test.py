@@ -1,4 +1,6 @@
 from linkedin_api import Linkedin
+from datetime import date
+import os
 import json
 
 
@@ -59,8 +61,13 @@ def job_search():
             "Benefits": job_benefits,
             "Link": job_url
         }
-
-        print(job_json)
+        job_TEST_list.append(job_json)
+        path = str(os.getcwd())
+        today = str(date.today())
+        file = ('/json dump/'+today+'.json')
+        fp = path+file
+        with open(fp,'w') as json_file:
+            json.dump(job_TEST_list,json_file)
     #    now = time.time()
     #   print(now - start, "\n")
 job_search()
