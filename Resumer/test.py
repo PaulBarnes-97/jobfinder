@@ -23,11 +23,12 @@ def job_search():
     #print(now-start,"\n")
 
     #go thru jobs to pull info
+    job_TEST_list = []
     for index in range((len(jobs))):
 
      #   now = time.time()
      #  print(now-start,"\n")
-        job_TEST_list = []
+
         j = jobs[index]
         a = j.get('companyDetails')
         a = str(a.get('company'))
@@ -52,7 +53,7 @@ def job_search():
         a = (j.get('applyMethod'))
         job_url = str(a.get('companyApplyUrl'))
 
-        job_json = {
+        job_json = {"job":[{
             "Job_Title": job_title,
             "Company": str(comp_Name),
             "LinkedIn": str(comp_Addr),
@@ -60,14 +61,14 @@ def job_search():
             "State": job_state,
             "Benefits": job_benefits,
             "Link": job_url
-        }
+            }]}
         job_TEST_list.append(job_json)
-        path = str(os.getcwd())
-        today = str(date.today())
-        file = ('/json dump/'+today+'.json')
-        fp = path+file
-        with open(fp,'w') as json_file:
-            json.dump(job_TEST_list,json_file)
+    path = str(os.getcwd())
+    today = str(date.today())
+    file = ('/json dump/'+today+'.json')
+    fp = path+file
+    with open(fp,'w') as json_file:
+        json.dump(job_TEST_list, json_file, indent=4,)
     #    now = time.time()
     #   print(now - start, "\n")
 job_search()
